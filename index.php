@@ -17,7 +17,7 @@
         $name = "Petr"; // $ = pravý alt + ů
         echo "$name Breit";
     ?>   
-
+    <a href="page.php"></a>
     </p>
     <?php
         $i = 1;
