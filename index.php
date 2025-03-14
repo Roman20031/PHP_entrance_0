@@ -6,33 +6,74 @@
     <title>Document</title>
 </head>
 <body>
-    <?php
-        $name = "Petr"; // $ = pravý alt + ů
-        $text = "Uživatel";
-    ?>
-    <h1>Fist project in PHP</h1>
+<?php
+        $servername = "localhost";
+        $username = "root";
+        $password = "root";
+        $dbname = "prvni_db";
 
-    <p>Zde je jméno účastmika zájezdu:
-     <?php
-        $name = "Petr"; // $ = pravý alt + ů
-        echo "$name Breit";
-    ?>   
-    <a href="page.php"></a>
-    </p>
-    <?php
-        $i = 1;
-        while ($i < 6){
-            echo "<h3> $text $i </h3>"
-            $i++;
-            //$i = $i + 2
+        // Create connection
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        // Check connection
+        if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
         }
 
-        for ($j = 0; $ <= 10; $j++){
-            echo "The number is: $j <br>";
+        $sql = "SELECT *FROM zbozi";
+        $result = $conn->query($sql);
+
+        //if ($result->num_rows > 0) {
+        // output data of each row
+        //while($row = $result->fetch_assoc()) {
+        //     echo "id: " . $row["ID"]. " - Name: " . $row["Název_produktu"]. " " . $row["Cena_za_kus"]. " " . $row["Počet_kusů"]. "<br>";
+        //}
+        //} else {
+        //echo "0 results";
+        //}
+        //$conn->close();
+
+        //echo "0 results";
+        //}
+        //$conn->close();
+        
+        if ($result->num_rows > 0) {
+            echo "<table>
+                    <tbody>
+                        <tr>
+                            <th>Id</th>
+                            <th>Název produktu</th>
+                            <th>Cena za kus</th>
+                            <th>Počet kusů</th>
+                        </tr>";
+        // output data of each row
+        while($row = $result->fetch_assoc()) {
+          echo  "<tr>".
+                    "<td>". $row["ID"] . "</td>" .
+                    "<td>". $row["Název_produktu"] . "</td>" .
+                    "<td>". $row["Cena_za_kus"] . "</td>" .
+                    "<td>". $row["Počet_kusů"] . "</td>" .
+                "</tr>";
+                        
         }
+        } else {
+        echo "0 results";
+        }
+        $conn->close();
+
     ?>
+
+    <style>
+        table{
+            border: 1px solid black;
+            th, td {
+                border: 1px solid black ;
+              
+            }
+        }
+    </style>
 </body>
 </html>
+
 
 
 
