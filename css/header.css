@@ -16,3 +16,7 @@ $success = mysqli_real_connect(
    $port
 );          */
 
+nav a{
+   color: black;
+   text-decoration: none;
+}
